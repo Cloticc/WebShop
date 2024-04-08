@@ -1,27 +1,50 @@
-// AuthContext.tsx
+import React, { createContext, useEffect, useState } from 'react';
 
-import React, { createContext, useState } from 'react';
+import { auth } from '../firebase';
 
-interface AuthContextType { 
-  isAuthenticated: boolean; 
-  login: () => void; 
-  logout: () => void; 
+export const AuthContext = createContext({});
+
+interface AuthProviderProps {
+  children: React.ReactNode;
 }
 
-export const AuthContext = createContext<AuthContextType | null>(null);
-
-interface AuthProviderProps { 
-  children: React.ReactNode; 
-}
-
-
-export const AuthProvider =  ({ children }: AuthProviderProps) => {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentUser, setCurrentUser] = useState();
 
-  const login = () => setIsAuthenticated(true);
-  const logout = () => setIsAuthenticated(false);
+  function signup(email: string, password: string) {
+    return auth.createUserWithEmailAndPassword(email, password);
+  }
 
-const value = { isAuthenticated, login, logout };
+  function login(email: string, password: string) {
+    return auth.signInWithEmailAndPassword(email, password);
+  }
+
+  function logout() {
+    return auth.signOut();
+  }
+
+  function resetPassword(email: string) {
+    return auth.sendPasswordResetEmail(email);
+  }
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user: React.SetStateAction<undefined>) => {
+      setCurrentUser(user);
+      setIsAuthenticated(true);
+    });
+
+    return unsubscribe;
+  }, []);
+
+  const value = {
+    isAuthenticated,
+    currentUser,
+    signup,
+    login,
+    logout,
+    resetPassword
+  };
 
   return (
     <AuthContext.Provider value={value}>
