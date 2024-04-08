@@ -1,15 +1,14 @@
 import '../styles/Login.css';
 
-import React, { useState } from 'react';
-
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
 
     // Simple email validation

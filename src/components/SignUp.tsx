@@ -1,21 +1,25 @@
 import '../styles/SignUp.css';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
 export const SignUp = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (event: { preventDefault: () => void; }) => {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+
+    const email = emailRef.current?.value;
+    const password = passwordRef.current?.value;
+    const confirmPassword = confirmPasswordRef.current?.value;
 
     // Simple email validation
     const emailRegex = /\S+@\S+\.\S+/;
-    if (!emailRegex.test(email)) {
+    if (!email || !emailRegex.test(email)) {
       setErrorMessage('Invalid email');
       return;
     }
@@ -34,15 +38,15 @@ export const SignUp = () => {
     <form onSubmit={handleSubmit} className="signup-form">
       <label>
         Email:
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <input type="email" ref={emailRef} required />
       </label>
       <label>
         Password:
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <input type="password" ref={passwordRef} required />
       </label>
       <label>
         Confirm Password:
-        <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+        <input type="password" ref={confirmPasswordRef} required />
       </label>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <button type="submit">Sign Up</button>
