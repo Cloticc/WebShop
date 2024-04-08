@@ -1,0 +1,19 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.login-form label {
+  margin-bottom: 10px;
+}
+
+.login-form input {
+  margin-bottom: 20px;
+}
+
+.login-form .error-message {
+  color: red;
+  margin-bottom: 20px;
+}
