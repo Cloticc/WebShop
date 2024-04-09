@@ -50,55 +50,61 @@ export const SignUp = () => {
     }
 
 
-setIsLoading(true);
-try {
-  await signup(email ?? '', password ?? '');
-  setMessage('Account created successfully');
-  setErrorMessage('');
-} catch (error) {
-  console.error(error);
-  if ((error as Error).message === 'Firebase: Error (auth/email-already-in-use).') {
-    setErrorMessage('An account with this email already exists. ');
-setEmailInUse(true);
-  } else if ((error as Error).message === 'Invalid reCAPTCHA token') {
-    setErrorMessage('Failed to verify reCAPTCHA. Please try again.');
-  } else {
-    setErrorMessage('Failed to create an account. Please try again.');
+    setIsLoading(true);
+    try {
+      await signup(email ?? '', password ?? '');
+      setMessage('Account created successfully');
+      setErrorMessage('');
+
+      if (emailRef.current && passwordRef.current && confirmPasswordRef.current) {
+        emailRef.current.value = '';
+        passwordRef.current.value = '';
+        confirmPasswordRef.current.value = '';
+      }
+    } catch (error) {
+      console.error(error);
+      if ((error as Error).message === 'Firebase: Error (auth/email-already-in-use).') {
+        setErrorMessage('An account with this email already exists. ');
+        setEmailInUse(true);
+      } else if ((error as Error).message === 'Invalid reCAPTCHA token') {
+        setErrorMessage('Failed to verify reCAPTCHA. Please try again.');
+      } else {
+        setErrorMessage('Failed to create an account. Please try again.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
   }
-} finally {
-  setIsLoading(false);
-}
-}
 
 
-return (
-  <form onSubmit={handleSubmit} className="signup-form">
-    <label>
-      Email:
-      <input type="email" ref={emailRef} autoComplete='email' required />
-    </label>
-    <label>
-      Password:
-      <input type="password" ref={passwordRef} required />
-    </label>
-    <label>
-      Confirm Password:
-      <input type="password" ref={confirmPasswordRef} required />
-    </label>
-    <ReCAPTCHA sitekey="6LeZqrUpAAAAAJj3e_gWr0A_JWzroS4yF94kgnIP" onChange={handleCaptchaChange} />
-    {errorMessage && <p className="error-message">{errorMessage}</p>}
-    {message && <p className="message">{message}</p>}
-    {emailInUse && (
+  return (
+    <form onSubmit={handleSubmit} className="signup-form">
+      <label>
+        Email:
+        <input type="email" ref={emailRef} autoComplete='email' required />
+      </label>
+      <label>
+        Password:
+        <input type="password" ref={passwordRef} required />
+      </label>
+      <label>
+        Confirm Password:
+        <input type="password" ref={confirmPasswordRef} required />
+      </label>
+      <ReCAPTCHA sitekey="6LeZqrUpAAAAAJj3e_gWr0A_JWzroS4yF94kgnIP" onChange={handleCaptchaChange} />
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {message && <p className="message">{message}</p>}
+      {emailInUse && (
+        <p>
+          <Link to="/forgotpassword">forgot password</Link>
+        </p>
+      )}
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? 'Loading...' : 'Sign Up'}
+      </button>
       <p>
-        <Link to="/forgotpassword">forgot password</Link>
+        Already have an account? <Link to="/login">Login</Link>
       </p>
-    )}
-    <button type="submit" disabled={isLoading}>
-      {isLoading ? 'Loading...' : 'Sign Up'}
-    </button>
-    <p>
-      Already have an account? <Link to="/login">Login</Link>
-    </p>
-  </form>
-);
-  };
+    </form>
+  );
+};
