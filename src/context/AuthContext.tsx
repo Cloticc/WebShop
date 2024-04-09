@@ -52,6 +52,8 @@ function resetPassword(email: string) {
   }
   return sendPasswordResetEmail(auth, email);
 }
+
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
