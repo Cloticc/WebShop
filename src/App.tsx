@@ -2,6 +2,8 @@ import { Route, Routes } from "react-router-dom";
 
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
+import { Dashboard } from "./components/Dashboard";
+import { ForgotPassword } from "./components/ForgotPassword";
 import { Login } from './components/Login';
 import { Navbar } from './components/Navbar';
 import { SignUp } from './components/SignUp';
@@ -12,8 +14,11 @@ export function App() {
       <CartProvider>
         <Navbar />
         <Routes>
-          <Route path="/login" element={<Login />} />
+
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           {/* other routes */}
         </Routes>
       </CartProvider>

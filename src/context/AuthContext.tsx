@@ -1,6 +1,11 @@
 import React, { createContext, useEffect, useState } from 'react';
 
+import { User } from 'firebase/auth';
 import { auth } from '../firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext({});
 
@@ -9,29 +14,36 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   function signup(email: string, password: string) {
-    return auth.createUserWithEmailAndPassword(email, password);
+    return createUserWithEmailAndPassword(auth, email, password);
   }
 
   function login(email: string, password: string) {
-    return auth.signInWithEmailAndPassword(email, password);
+    return signInWithEmailAndPassword(auth, email, password);
   }
 
   function logout() {
+  navigate('/login');  
     return auth.signOut();
   }
 
+
+
   function resetPassword(email: string) {
-    return auth.sendPasswordResetEmail(email);
+    return sendPasswordResetEmail(auth, email);
   }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user: React.SetStateAction<undefined>) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
-      setIsAuthenticated(true);
+      setIsAuthenticated(!!user);
+      setLoading(false);
     });
 
     return unsubscribe;
@@ -48,7 +60,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

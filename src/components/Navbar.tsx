@@ -15,7 +15,10 @@ export const Navbar = () => {
       <Link className="navbar-item" to="/">Home</Link>
       <Link className="navbar-item" to="/shop">Shop</Link>
       {isAuthenticated ? (
-        <button className="navbar-item" onClick={logout}>Logout</button>
+        <>
+          <Link className="navbar-item" to="/dashboard">Dashboard</Link>
+          <button className="navbar-item" onClick={logout}>Logout</button>
+        </>
       ) : (
         <Link className="navbar-item" to="/login">Login</Link>
       )}
