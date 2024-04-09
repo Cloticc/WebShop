@@ -28,7 +28,7 @@ export const Login = () => {
 
     setIsLoading(true);
     try {
-      await login(email, password);
+      await login(email ?? '', password ?? '');
       // Clear error message
       setErrorMessage('');
       // Navigate to another page after successful login
@@ -48,7 +48,7 @@ export const Login = () => {
       </label>
       <label>
         Password:
-        <input type="password" ref={passwordRef} required />
+        <input type="password" ref={passwordRef} autoComplete='current-password' required />
       </label>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <button type="submit" disabled={isLoading}>

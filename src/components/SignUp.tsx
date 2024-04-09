@@ -13,7 +13,7 @@ export const SignUp = () => {
   const { signup } = useAuth();
 
   const [isLoading, setIsLoading] = useState(false);
-
+const [message, setMessage] = useState('');
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -35,11 +35,11 @@ export const SignUp = () => {
     }
     setIsLoading(true);
     try {
-      await signup(email, password);
+      await signup(email ?? '', password ?? '');
+      setMessage('')
       // Clear error message
-      setErrorMessage('')
-      // Handle successful signup here
-      console.log(`Email: ${email}, Password: ${password}`);
+      setErrorMessage('') 
+      setMessage('Account created successfully');
     } catch (error) {
       // Handle signup error here
       setErrorMessage('Failed to create an account');
@@ -62,6 +62,7 @@ export const SignUp = () => {
         <input type="password" ref={confirmPasswordRef} required />
       </label>
       {errorMessage && <p className="error-message">{errorMessage}</p>} 
+      {message && <p className="message">{message}</p>}
       <button type="submit" disabled={isLoading}>
         {isLoading ? 'Loading...' : 'Sign Up'} 
       </button>
