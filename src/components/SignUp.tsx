@@ -3,14 +3,18 @@ import '../styles/SignUp.css';
 import React, { useRef, useState } from 'react';
 
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/useAuth';
 
 export const SignUp = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const [errorMessage, setErrorMessage] = useState('');
+  const { signup } = useAuth();
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const email = emailRef.current?.value;
@@ -29,16 +33,25 @@ export const SignUp = () => {
       setErrorMessage('Passwords do not match');
       return;
     }
-
-    // Handle signup logic here
-    console.log(`Email: ${email}, Password: ${password}`);
+    setIsLoading(true);
+    try {
+      await signup(email, password);
+      // Clear error message
+      setErrorMessage('')
+      // Handle successful signup here
+      console.log(`Email: ${email}, Password: ${password}`);
+    } catch (error) {
+      // Handle signup error here
+      setErrorMessage('Failed to create an account');
+    }
+    setIsLoading(false);
   };
 
   return (
     <form onSubmit={handleSubmit} className="signup-form">
       <label>
         Email:
-        <input type="email" ref={emailRef} required />
+        <input type="email" ref={emailRef} autoComplete='email' required />
       </label>
       <label>
         Password:
@@ -48,8 +61,10 @@ export const SignUp = () => {
         Confirm Password:
         <input type="password" ref={confirmPasswordRef} required />
       </label>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-      <button type="submit">Sign Up</button>
+      {errorMessage && <p className="error-message">{errorMessage}</p>} 
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? 'Loading...' : 'Sign Up'} 
+      </button>
       <p>
         Already have an account? <Link to="/login">Login</Link>
       </p>

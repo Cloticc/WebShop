@@ -5,19 +5,18 @@ import { useContext, useRef, useState } from 'react';
 
 import { AuthContext } from '../context/AuthContext';
 
-export const Login = () => {
+export const ForgotPassword = () => {
   const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
   const [errorMessage, setErrorMessage] = useState('');
-  const { login } = useContext(AuthContext);
-  const [isLoading, setIsLoading] = useState(false);  
+  const { resetPassword } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const email = emailRef.current?.value;
-    const password = passwordRef.current?.value;
+
 
     // Simple email validation
     const emailRegex = /\S+@\S+\.\S+/;
@@ -28,14 +27,14 @@ export const Login = () => {
 
     setIsLoading(true);
     try {
-      await login(email, password);
+      await resetPassword(email);
       // Clear error message
       setErrorMessage('');
-      // Navigate to another page after successful login
-      navigate('/dashboard');
+      // Navigate to another page after successful rest password
+      navigate('/login');
     } catch (error) {
       // Handle login error here
-      setErrorMessage('Failed to log in');
+      setErrorMessage('Failed to get new password');
     }
     setIsLoading(false);
   };
@@ -46,16 +45,12 @@ export const Login = () => {
         Email:
         <input type="email" ref={emailRef} autoComplete='email' required />
       </label>
-      <label>
-        Password:
-        <input type="password" ref={passwordRef} required />
-      </label>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <button type="submit" disabled={isLoading}>
-        {isLoading ? 'Loading...' : 'Login'}
+        {isLoading ? 'Loading...' : 'Get New Password'}
       </button>
       <p>
-        <Link to="/forgot-password">Forgot password?</Link>
+        <Link to="/login">Login</Link>
       </p>
       <p>
         Don't have an account? <Link to="/signup">Sign up</Link>
@@ -63,3 +58,4 @@ export const Login = () => {
     </form>
   );
 };
+
