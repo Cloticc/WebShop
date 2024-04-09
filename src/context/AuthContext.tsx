@@ -26,32 +26,34 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-const navigate = useNavigate();
-function signup(email: string, password: string) {
-  if (!email || !password) {
-    throw new Error('Email and password are required');
-  }
-  return createUserWithEmailAndPassword(auth, email, password);
-}
+  const navigate = useNavigate();
 
-function login(email: string, password: string) {
-  if (!email || !password) {
-    throw new Error('Email and password are required');
+  
+  function signup(email: string, password: string) {
+    if (!email || !password) {
+      throw new Error('Email and password are required');
+    }
+    return createUserWithEmailAndPassword(auth, email, password);
   }
-  return signInWithEmailAndPassword(auth, email, password);
-} 
 
-function logout() {
-  navigate('/login');
-  return auth.signOut();
-}
-
-function resetPassword(email: string) {
-  if (!email) {
-    throw new Error('Email is required');
+  function login(email: string, password: string) {
+    if (!email || !password) {
+      throw new Error('Email and password are required');
+    }
+    return signInWithEmailAndPassword(auth, email, password);
   }
-  return sendPasswordResetEmail(auth, email);
-}
+
+  function logout() {
+    navigate('/login');
+    return auth.signOut();
+  }
+
+  function resetPassword(email: string) {
+    if (!email) {
+      throw new Error('Email is required');
+    }
+    return sendPasswordResetEmail(auth, email);
+  }
 
 
   useEffect(() => {
@@ -63,6 +65,16 @@ function resetPassword(email: string) {
 
     return unsubscribe;
   }, []);
+
+
+
+// useEffect(() => {
+//   const token = localStorage.getItem('authToken');
+//   if (token) {
+//     setIsAuthenticated(true);
+//   }
+// }, []);
+
 
   const value = {
     isAuthenticated,
