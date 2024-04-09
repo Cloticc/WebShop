@@ -18,6 +18,9 @@ export const SignUp = () => {
 
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
   const [emailInUse, setEmailInUse] = useState(false);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [recaptchaKey, setRecaptchaKey] = useState(Date.now());
+
 
   const handleCaptchaChange = (value: string | null) => {
     setCaptchaValue(value);
@@ -60,7 +63,14 @@ export const SignUp = () => {
         emailRef.current.value = '';
         passwordRef.current.value = '';
         confirmPasswordRef.current.value = '';
+        setRecaptchaKey(Date.now());
       }
+
+      // Reset reCAPTCHA
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
+
     } catch (error) {
       console.error(error);
       if ((error as Error).message === 'Firebase: Error (auth/email-already-in-use).') {
@@ -91,7 +101,7 @@ export const SignUp = () => {
         Confirm Password:
         <input type="password" ref={confirmPasswordRef} required />
       </label>
-      <ReCAPTCHA sitekey="6LeZqrUpAAAAAJj3e_gWr0A_JWzroS4yF94kgnIP" onChange={handleCaptchaChange} />
+  <ReCAPTCHA key={recaptchaKey} ref={recaptchaRef} sitekey="6LeZqrUpAAAAAJj3e_gWr0A_JWzroS4yF94kgnIP" onChange={handleCaptchaChange} />
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       {message && <p className="message">{message}</p>}
       {emailInUse && (
