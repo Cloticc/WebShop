@@ -71,10 +71,6 @@
   background-color: #bd2130;
 }
 
-/* <button className="btn-close" onClick={toggleCart}>Close</button>
-<button className="btn-continue" onClick={toggleCart}>Continue shopping</button>
-<button className="btn-checkout" onClick={moveCheckout}>Checkout</button> */
-
 .btn-wrapper {
   display: flex;
   justify-content: space-between;
