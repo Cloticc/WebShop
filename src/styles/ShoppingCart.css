@@ -23,6 +23,12 @@
   z-index: 2;
 }
 
+.cart-title {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
 .cart-item {
   display: grid;
   grid-template-columns: 50px 1fr auto auto;
@@ -50,4 +56,66 @@
 
 .cart-item button {
   flex-shrink: 0;
+}
+
+.btn-remove {
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-remove:hover {
+  background-color: #bd2130;
+}
+
+/* <button className="btn-close" onClick={toggleCart}>Close</button>
+<button className="btn-continue" onClick={toggleCart}>Continue shopping</button>
+<button className="btn-checkout" onClick={moveCheckout}>Checkout</button> */
+
+.btn-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn-close {
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-close:hover {
+  background-color: #bd2130;
+}
+
+.btn-continue {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-continue:hover {
+  background-color: #0056b3;
+}
+
+.btn-checkout {
+  padding: 5px 10px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-checkout:hover {
+  background-color: #218838;
 }
