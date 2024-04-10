@@ -7,6 +7,7 @@ import { ForgotPassword } from "./components/ForgotPassword";
 import { Login } from './components/Login';
 import { Navbar } from './components/Navbar';
 import { Shop } from "./components/Shop";
+import { ShoppingCart } from "./components/ShoppingCart";
 import { SignUp } from './components/SignUp';
 
 export function App() {
@@ -15,12 +16,12 @@ export function App() {
       <CartProvider>
         <Navbar />
         <Routes>
-
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/dashboard" element={<Dashboard />} /> 
           <Route path="/shop" element={<Shop />} />
+          <Route path="/cart" element={<ShoppingCart toggleCart={undefined} />} />
         </Routes>
       </CartProvider>
     </AuthProvider>
