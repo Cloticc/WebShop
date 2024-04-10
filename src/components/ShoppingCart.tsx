@@ -1,7 +1,8 @@
 import '../styles/ShoppingCart.css';
 
+import { useContext, useEffect, useRef } from 'react';
+
 import { CartContext } from '../context/CartContext';
-import { useContext } from 'react';
 
 type Product = {
   id: number;
@@ -17,31 +18,45 @@ type ShoppingCartProps = {
 
 export const ShoppingCart = ({ toggleCart }: ShoppingCartProps) => {
   const { cartItems, setCartItems } = useContext(CartContext);
+  const modalRef = useRef(null);
+
+useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+        if (modalRef.current && !(modalRef.current as HTMLElement).contains(event.target as Node)) {
+            toggleCart();
+        }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+    };
+}, [toggleCart]);
 
   const removeFromCart = (productId: number) => {
     setCartItems((prevItems: Product[]) => prevItems.filter(item => item.id !== productId));
   };
 
-    const moveCheckout = () => {
-        console.log('Move to checkout');
-    };
+  const moveCheckout = () => {
+    console.log('Move to checkout');
+  };
 
   return (
-    <div className="cart-modal">
+    <div className="cart-modal" ref={modalRef}>
       <h1>Shopping Cart</h1>
       {cartItems.map((item: Product) => (
         <div key={item.id} className="cart-item">
           <img src={item.image} alt={item.title} />
           <div>
             <h2>{item.title}</h2>
-            <p>{item.price}</p>
+            <p>{item.price * item.quantity} $</p>
             <p>Quantity: {item.quantity}</p>
           </div>
           <button onClick={() => removeFromCart(item.id)}>Remove</button>
         </div>
       ))}
       <button onClick={toggleCart}>Close</button>
-      <button onClick={moveCheckout} >Checkout</button>
+      <button onClick={moveCheckout}>Checkout</button>
     </div>
   );
 };
