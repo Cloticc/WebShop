@@ -3,14 +3,7 @@ import "../styles/ShoppingCart.css";
 import { useContext, useEffect, useRef } from "react";
 
 import { CartContext } from "../context/CartContext";
-
-type Product = {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-  quantity: number;
-};
+import { Product } from "../types/Product";
 
 type ShoppingCartProps = {
   toggleCart: () => void;
