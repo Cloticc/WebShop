@@ -3,13 +3,8 @@ import "../styles/ProductList.css";
 import { useContext, useEffect, useState } from "react";
 
 import { CartContext } from "../context/CartContext";
-
-type Product = {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-};
+import { Product } from "../types/Product";
+import { ProductCard } from "./ProductCard";
 
 export const ProductList = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -41,12 +36,7 @@ export const ProductList = () => {
     <div className="product-list">
       <h1>Product List</h1>
       {products.map((product) => (
-        <div key={product.id} className="product-card">
-          <h2>{product.title}</h2>
-          <p>{product.price.toFixed(2)} $</p>
-          <img src={product.image} alt={product.title} />
-          <button onClick={() => addToCart(product)}>Add to cart</button>
-        </div>
+        <ProductCard key={product.id} product={product} addToCart={addToCart} />
       ))}
     </div>
   );
