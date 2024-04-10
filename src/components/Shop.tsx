@@ -1,6 +1,6 @@
 import { Filters } from './Filters';
 import { ProductList } from './ProductList';
-import { ShoppingCart } from './ShoppingCart';
+// import { ShoppingCart } from './ShoppingCart';
 
 export const Shop = () => {
     return (
@@ -8,7 +8,7 @@ export const Shop = () => {
             <h1>Shop</h1>
             <Filters />
             <ProductList />
-            <ShoppingCart />
+       
         </div>
     );
 };

@@ -1,20 +1,31 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// CartContext.tsx
-
 import React, { createContext, useState } from 'react';
 
-interface CartContextType {
-  cartItems: any[];
-  setCartItems: React.Dispatch<React.SetStateAction<any[]>>;
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+  quantity: number;
 }
 
-export const CartContext = createContext<CartContextType | null>(null);
+interface CartContextType {
+  cartItems: Product[];
+  setCartItems: React.Dispatch<React.SetStateAction<Product[]>>;
+}
+
+const defaultCartContext: CartContextType = {
+  cartItems: [],
+  setCartItems: () => {}, // provide a default function
+};
+
+export const CartContext = createContext<CartContextType>(defaultCartContext);
+
 interface CartProviderProps {
   children: React.ReactNode;
 }
 
 export const CartProvider = ({ children }: CartProviderProps) => {
-  const [cartItems, setCartItems] = useState<any[]>([]);
+  const [cartItems, setCartItems] = useState<Product[]>([]);
 
   const value = { cartItems, setCartItems };
 

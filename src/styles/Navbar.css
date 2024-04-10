@@ -1,16 +1,18 @@
 .navbar {
-  display: flex;
-  justify-content: space-between;
+  position: relative;
   padding: 20px;
   background-color: #f8f9fa;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .navbar-item {
-  margin-right: 10px;
+  margin-left: 10px;
   text-decoration: none;
   color: #333;
 }
 
-.navbar-item:last-child {
-  margin-right: 0;
+.navbar-item:first-child {
+  margin-left: 0;
 }
+
