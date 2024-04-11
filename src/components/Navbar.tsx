@@ -44,7 +44,7 @@ export const Navbar = () => {
             <Link className="navbar-item" to="/dashboard">
               Dashboard
             </Link>
-            <button className="navbar-item" onClick={logout}>
+            <button className="navbar-button" onClick={logout}>
               Logout
             </button>
           </>
@@ -53,7 +53,7 @@ export const Navbar = () => {
             Login
           </Link>
         )}
-        <button className="navbar-item" onClick={toggleCart}>
+        <button className="navbar-button" onClick={toggleCart}>
           Cart ({totalQuantity})
         </button>
         {cartVisible && <ShoppingCart toggleCart={toggleCart} />}

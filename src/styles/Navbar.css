@@ -40,19 +40,21 @@
   font-size: 1.2em;
   transition: color 0.3s ease;
   cursor: pointer;
-  /* seperate */
   padding: 10px;
   border-radius: 5px;
 }
 
-.navbar button {
+.navbar .navbar-button {
   background-color: #0078d7;
   color: #fff;
   border: none;
   font-size: 1.2em;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-left: auto;
+  margin-left: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  1
 }
 
 .navbar-item:first-child {
