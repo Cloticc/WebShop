@@ -5,3 +5,4 @@ export type Product = {
   image: string;
   quantity: number;
 };
+

@@ -41,27 +41,27 @@ export const ShoppingCart = ({ toggleCart }: ShoppingCartProps) => {
 
   return (
     <>
-      <div className="backdrop" onClick={toggleCart}>
-        {" "}
-      </div>
+      <div className="backdrop" onClick={toggleCart}></div>
       <div className="cart-modal" ref={modalRef}>
         <h1 className="cart-title">Shopping Cart</h1>
-        {cartItems.map((item: Product) => (
-          <div key={item.id} className="cart-item">
-            <img src={item.image} alt={item.title} />
-            <div>
-              <h2>{item.title}</h2>
-              <p>{(item.price * item.quantity).toFixed(2)} $</p>
-              <p>Quantity: {item.quantity}</p>
+        <div className="cart-items-wrapper">
+          {cartItems.map((item: Product) => (
+            <div key={item.id} className="cart-item">
+              <img src={item.image} alt={item.title} />
+              <div>
+                <h2>{item.title}</h2>
+                <p>{(item.price * item.quantity).toFixed(2)} $</p>
+                <p>Quantity: {item.quantity}</p>
+              </div>
+              <button
+                className="btn-remove"
+                onClick={() => removeFromCart(item.id)}
+              >
+                Remove
+              </button>
             </div>
-            <button
-              className="btn-remove"
-              onClick={() => removeFromCart(item.id)}
-            >
-              Remove
-            </button>
-          </div>
-        ))}
+          ))}
+        </div>
         <h2>
           Total:{" "}
           {cartItems
