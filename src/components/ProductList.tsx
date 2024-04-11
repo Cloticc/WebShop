@@ -33,11 +33,18 @@ export const ProductList = () => {
   };
 
   return (
-    <div className="product-list">
+    <>
       <h1>Product List</h1>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} addToCart={addToCart} />
-      ))}
-    </div>
+
+      <div className="product-list">
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            addToCart={addToCart}
+          />
+        ))}
+      </div>
+    </>
   );
 };
