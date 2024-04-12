@@ -32,7 +32,8 @@ export function App() {
               />
             }
           />
-          <Route path="/product/:id" Component={ProductDetails} />
+          {/* <Route path="/product/:id" Component={ProductDetails} /> */}
+          <Route path="/shop/product/:id" element={<ProductDetails />} />
         </Routes>
       </CartProvider>
     </AuthProvider>

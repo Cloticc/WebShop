@@ -13,7 +13,7 @@ export const ProductList = () => {
       .then((response) => response.json())
       .then((data) => setProducts(data));
   }, []);
-
+  console.log(products);
   return (
     <>
       <h1>Product List</h1>

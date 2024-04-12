@@ -34,8 +34,17 @@
   object-fit: cover;
 }
 
-.fake-star {
-  color: #f8d05d;
+.product-rating {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #777;
+  font-size: 1rem;
+  display: inline-block;
+}
+
+.product-rating::before {
+  content: "⭐";
+  color: #ffd700;
 }
 
 .product-card-btn {

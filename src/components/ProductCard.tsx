@@ -34,15 +34,16 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <div key={product.id} className="product-card">
-      <Link to={`/product/${product.id}`}>
+      <Link to={`/shop/product/${product.id}`}>
         <h2 className="product-card-h2">{product.title}</h2>
         <img
           className="product-card-img"
           src={product.image}
           alt={product.title}
         />
+        <p className="product-rating">rating: {product.rating.rate}</p>
+
         <p className="product-card-para">Price {product.price.toFixed(2)} $</p>
-        <span className="fake-star"></span>
       </Link>
       <button className="product-card-btn" onClick={() => addToCart(product)}>
         Add to cart
