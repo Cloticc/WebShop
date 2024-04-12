@@ -54,7 +54,6 @@
   margin-left: 10px;
   border-radius: 5px;
   text-decoration: none;
-  1
 }
 
 .navbar-item:first-child {
@@ -64,5 +63,3 @@
 .navbar-item:hover {
   color: #d0d0d0;
 }
-
-

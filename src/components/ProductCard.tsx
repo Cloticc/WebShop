@@ -1,21 +1,23 @@
 import "../styles/ProductCard.css";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
+import { CartContext } from "../context/CartContext";
+import { Link } from "react-router-dom";
 import { Product } from "../types/Product";
 
 type ProductCardProps = {
   product: Product;
-  addToCart: (product: Product) => void;
 };
 
-export function ProductCard({ product, addToCart }: ProductCardProps) {
+export function ProductCard({ product }: ProductCardProps) {
   const [isLoading, setIsLoading] = useState(true);
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 1000);
   }, []);
 
   if (isLoading) {
@@ -31,18 +33,20 @@ export function ProductCard({ product, addToCart }: ProductCardProps) {
   }
 
   return (
-    <div key={product.id} className="product-card">
-      <h2 className="product-card-h2">{product.title}</h2>
-      <p className="product-card-para">{product.price.toFixed(2)} $</p>
-      <img
-        className="product-card-img"
-        src={product.image}
-        alt={product.title}
-      />
-      <span className="fake-star"></span>
-      <button className="product-card-btn" onClick={() => addToCart(product)}>
-        Add to cart
-      </button>
-    </div>
+    <Link to={`/product/${product.id}`}>
+      <div key={product.id} className="product-card">
+        <h2 className="product-card-h2">{product.title}</h2>
+        <img
+          className="product-card-img"
+          src={product.image}
+          alt={product.title}
+        />
+        <p className="product-card-para">Price {product.price.toFixed(2)} $</p>
+        <span className="fake-star"></span>
+        <button className="product-card-btn" onClick={() => addToCart(product)}>
+          Add to cart
+        </button>
+      </div>
+    </Link>
   );
 }

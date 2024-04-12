@@ -6,6 +6,7 @@ import { Dashboard } from "./components/Dashboard";
 import { ForgotPassword } from "./components/ForgotPassword";
 import { Login } from "./components/Login";
 import { Navbar } from "./components/Navbar";
+import { ProductDetails } from "./components/ProductDetails";
 import { Shop } from "./components/Shop";
 import { ShoppingCart } from "./components/ShoppingCart";
 import { SignUp } from "./components/SignUp";
@@ -31,6 +32,7 @@ export function App() {
               />
             }
           />
+          <Route path="/product/:id" Component={ProductDetails} />
         </Routes>
       </CartProvider>
     </AuthProvider>
