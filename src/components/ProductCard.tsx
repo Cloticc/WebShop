@@ -33,8 +33,8 @@ export function ProductCard({ product }: ProductCardProps) {
   }
 
   return (
-    <Link to={`/product/${product.id}`}>
-      <div key={product.id} className="product-card">
+    <div key={product.id} className="product-card">
+      <Link to={`/product/${product.id}`}>
         <h2 className="product-card-h2">{product.title}</h2>
         <img
           className="product-card-img"
@@ -43,10 +43,10 @@ export function ProductCard({ product }: ProductCardProps) {
         />
         <p className="product-card-para">Price {product.price.toFixed(2)} $</p>
         <span className="fake-star"></span>
-        <button className="product-card-btn" onClick={() => addToCart(product)}>
-          Add to cart
-        </button>
-      </div>
-    </Link>
+      </Link>
+      <button className="product-card-btn" onClick={() => addToCart(product)}>
+        Add to cart
+      </button>
+    </div>
   );
 }
