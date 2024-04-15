@@ -1,18 +1,29 @@
 import "../styles/ProductList.css";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
+import { FilterContext } from "../context/FilterContext";
 import { Product } from "../types/Product";
 import { ProductCard } from "./ProductCard";
 
 export const ProductList = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const { filters } = useContext(FilterContext);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((response) => response.json())
-      .then((data) => setProducts(data));
-  }, []);
+    const fetchProducts = async () => {
+      let url = "https://fakestoreapi.com/products";
+      if (filters.category) {
+        url += `/category/${filters.category}`;
+      }
+
+      const response = await fetch(url);
+      const data = await response.json();
+      setProducts(data);
+    };
+
+    fetchProducts();
+  }, [filters]);
 
   return (
     <>
