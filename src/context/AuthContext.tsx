@@ -29,11 +29,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [role, setRole] = useState<string>("");
   const navigate = useNavigate();
 
-  function signup(email: string, password: string) {
+  async function signup(email: string, password: string) {
     if (!email || !password) {
       throw new Error("Email and password are required");
     }
-    return createUserWithEmailAndPassword(auth, email, password);
+    await createUserWithEmailAndPassword(auth, email, password);
   }
 
   async function login(email: string, password: string) {
@@ -80,10 +80,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     return unsubscribe;
   }, []);
+
   // useEffect(() => {
-  //   const token = localStorage.getItem('authToken');
+  //   const token = localStorage.getItem("authToken");
   //   if (token) {
   //     setIsAuthenticated(true);
+  //   } else {
+  //     setIsAuthenticated(false);
   //   }
   // }, []);
 
