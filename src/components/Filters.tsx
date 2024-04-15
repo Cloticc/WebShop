@@ -1,20 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import { FilterContext } from "../context/FilterContext";
-import { Product } from "../types/Product";
 
 export const Filters = () => {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<string[]>([]);
   const { setFilters } = useContext(FilterContext);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products/categories")
       .then((res) => res.json())
-      .then((json) => setCategories(json));
+      .then((json: string[]) => setCategories(json));
   }, []);
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilters((prevFilters: Product) => ({
+    setFilters((prevFilters) => ({
       ...prevFilters,
       category: event.target.value,
     }));

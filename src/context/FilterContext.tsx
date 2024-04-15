@@ -2,7 +2,9 @@ import { createContext, useState } from "react";
 
 interface FilterContextValue {
   filters: Record<string, string>;
-  setFilters: (filters: Record<string, string>) => void;
+  setFilters: (
+    update: (prevFilters: Record<string, string>) => Record<string, string>
+  ) => void;
 }
 
 export const FilterContext = createContext({} as FilterContextValue);
