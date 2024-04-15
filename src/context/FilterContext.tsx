@@ -1,6 +1,11 @@
 import { createContext, useState } from "react";
 
-export const FilterContext = createContext({});
+interface FilterContextValue {
+  filters: Record<string, string>;
+  setFilters: (filters: Record<string, string>) => void;
+}
+
+export const FilterContext = createContext({} as FilterContextValue);
 
 interface FilterProviderProps {
   children: React.ReactNode;

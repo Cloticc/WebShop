@@ -41,9 +41,9 @@ export function ProductCard({ product }: ProductCardProps) {
           src={product.image}
           alt={product.title}
         />
-        <p className="product-rating">rating: {product.rating.rate}</p>
+        <p className="product-rating">rating: {product.rating?.rate}</p>
 
-        <p className="product-card-para">Price {product.price.toFixed(2)} $</p>
+        <p className="product-card-para">Price {product.price?.toFixed(2)} $</p>
       </Link>
       <button className="product-card-btn" onClick={() => addToCart(product)}>
         Add to cart

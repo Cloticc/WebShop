@@ -1,29 +1,21 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 
-import { Product } from "../types/Product";
-import { ProductContext } from "../context/ProductContext";
-import { v4 as uuidv4 } from "uuid";
-
-export const CreateProduct = () => {
+export const UpdateProduct = () => {
+  const [id, setId] = useState("");
   const [title, setTitle] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
-  const { addProduct } = useContext(ProductContext);
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
-    if (!title || !price || !description || !image || !category) {
-      return;
-    }
-
-    const response = await fetch("https://fakestoreapi.com/products", {
-      method: "POST",
+    const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
+      method: "PUT",
       body: JSON.stringify({
         title,
-        price: price.toString(),
+        price: parseFloat(price),
         description,
         image,
         category,
@@ -32,23 +24,17 @@ export const CreateProduct = () => {
 
     const data = await response.json();
     console.log(data);
-
-    // Generate a unique ID for the new product and ensure it has all the necessary properties
-    const newProduct = {
-      id: uuidv4(),
-      title,
-      price: price.toString(),
-      description,
-      image,
-      category,
-      rating: { rate: 0, count: 0 },
-    };
-
-    addProduct(newProduct as unknown as Product);
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={id}
+        onChange={(e) => setId(e.target.value)}
+        placeholder="Product ID"
+        required
+      />
       <input
         type="text"
         value={title}
@@ -59,7 +45,7 @@ export const CreateProduct = () => {
       <input
         type="number"
         value={price}
-        onChange={(e) => setPrice(Number(e.target.value))}
+        onChange={(e) => setPrice(e.target.value)}
         placeholder="Price"
         required
       />
@@ -84,7 +70,7 @@ export const CreateProduct = () => {
         placeholder="Category"
         required
       />
-      <button type="submit">Create Product</button>
+      <button type="submit">Update Product</button>
     </form>
   );
 };
