@@ -1,7 +1,5 @@
 import React, { createContext, useState } from "react";
 
-import { getAdditionalUserInfo } from "firebase/auth";
-
 interface Product {
   id: number;
   title: string;

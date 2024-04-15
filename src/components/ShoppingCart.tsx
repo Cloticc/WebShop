@@ -3,7 +3,6 @@ import "../styles/ShoppingCart.css";
 import { useContext, useEffect, useRef } from "react";
 
 import { CartContext } from "../context/CartContext";
-import { Product } from "../types/Product";
 
 type ShoppingCartProps = {
   toggleCart: () => void;
@@ -29,10 +28,8 @@ export const ShoppingCart = ({ toggleCart }: ShoppingCartProps) => {
     };
   }, [toggleCart]);
 
-  const removeFromCart = (productId: number) => {
-    setCartItems((prevItems: Product[]) =>
-      prevItems.filter((item) => item.id !== productId)
-    );
+  const removeFromCart = (id: number) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
   const moveCheckout = () => {
@@ -45,7 +42,7 @@ export const ShoppingCart = ({ toggleCart }: ShoppingCartProps) => {
       <div className="cart-modal" ref={modalRef}>
         <h1 className="cart-title">Shopping Cart</h1>
         <div className="cart-items-wrapper">
-          {cartItems.map((item: Product) => (
+          {cartItems.map((item) => (
             <div key={item.id} className="cart-item">
               <img src={item.image} alt={item.title} />
               <div>
