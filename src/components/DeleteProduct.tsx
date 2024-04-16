@@ -1,3 +1,5 @@
+import "../styles/DeleteProduct.css";
+
 import { useState } from "react";
 
 export const DeleteProduct = () => {
@@ -18,7 +20,7 @@ export const DeleteProduct = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="delete-product-form" onSubmit={handleSubmit}>
       <input
         type="text"
         value={id}

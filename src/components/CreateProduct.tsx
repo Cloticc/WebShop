@@ -1,3 +1,5 @@
+import "../styles/CreateProduct.css";
+
 import { useContext, useState } from "react";
 
 import { Product } from "../types/Product";
@@ -48,7 +50,7 @@ export const CreateProduct = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="create-product-form" onSubmit={handleSubmit}>
       <input
         type="text"
         value={title}

@@ -1,3 +1,5 @@
+import "../styles/UpdateProduct.css";
+
 import { useState } from "react";
 
 export const UpdateProduct = () => {
@@ -27,7 +29,7 @@ export const UpdateProduct = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="update-product-form" onSubmit={handleSubmit}>
       <input
         type="text"
         value={id}
