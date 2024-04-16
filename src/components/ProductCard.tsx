@@ -17,7 +17,7 @@ export function ProductCard({ product }: ProductCardProps) {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 500);
   }, []);
 
   if (isLoading) {
