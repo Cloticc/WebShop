@@ -13,6 +13,7 @@ type ProductCardProps = {
 export function ProductCard({ product }: ProductCardProps) {
   const [isLoading, setIsLoading] = useState(true);
   const { addToCart } = useContext(CartContext);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -37,9 +38,10 @@ export function ProductCard({ product }: ProductCardProps) {
       <Link to={`/shop/product/${product.id}`}>
         <h2 className="product-card-h2">{product.title}</h2>
         <img
-          className="product-card-img"
+          className={`product-card-img ${imageLoaded ? "loaded" : ""}`}
           src={product.image}
           alt={product.title}
+          onLoad={() => setImageLoaded(true)}
         />
         <p className="product-rating">rating: {product.rating?.rate}</p>
 
