@@ -44,7 +44,7 @@ export const ShoppingCart = ({ toggleCart }: ShoppingCartProps) => {
         <div className="cart-items-wrapper">
           {cartItems.map((item) => (
             <div key={item.id} className="cart-item">
-              <img src={item.image} alt={item.title} />
+              <img src={item.thumbnail} alt={item.title} />
               <div>
                 <h2>{item.title}</h2>
                 <p>{(item.price * item.quantity).toFixed(2)} $</p>

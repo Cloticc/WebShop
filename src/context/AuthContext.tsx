@@ -71,9 +71,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setCurrentUser(user);
       setIsAuthenticated(!!user);
 
-      // Check if user is admin
-      const role = user?.email === "isidorssona@gmail.com" ? "admin" : "user";
-      setRole(role);
+      // // Check if user is admin
+      // const role = user?.email === "isidorssona@gmail.com" ? "admin" : "user";
+      // setRole(role);
 
       setLoading(false);
     });

@@ -15,9 +15,11 @@ export const ProductList = () => {
   useEffect(() => {
     console.log("Fetching products based on filters", filters);
 
-    const newFilteredProducts = products.filter((product: Product) => {
-      return filters.category ? product.category === filters.category : true;
-    });
+    const newFilteredProducts = Object.values(products).filter(
+      (product: Product) => {
+        return filters.category ? product.category === filters.category : true;
+      }
+    );
 
     setFilteredProducts(newFilteredProducts);
   }, [filters, products]);

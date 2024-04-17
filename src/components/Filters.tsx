@@ -7,7 +7,7 @@ export const Filters = () => {
   const { setFilters } = useContext(FilterContext);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products/categories")
+    fetch("https://dummyjson.com/products/categories")
       .then((res) => res.json())
       .then((json: string[]) => setCategories(json));
   }, []);

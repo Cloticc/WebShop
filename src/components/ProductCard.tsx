@@ -39,13 +39,22 @@ export function ProductCard({ product }: ProductCardProps) {
         <h2 className="product-card-h2">{product.title}</h2>
         <img
           className={`product-card-img ${imageLoaded ? "loaded" : ""}`}
-          src={product.image}
+          src={product.thumbnail}
           alt={product.title}
           onLoad={() => setImageLoaded(true)}
         />
-        <p className="product-rating">rating: {product.rating?.rate}</p>
-
-        <p className="product-card-para">Price {product.price?.toFixed(2)} $</p>
+        <p className="product-rating">rating: {product.rating}</p>
+        <p className="product-card-para">Price {product.price.toFixed(2)} $</p>
+        <p className="product-card-quantity">Quantity: {product.quantity}</p>
+        <p className="product-card-description">
+          Description: {product.description}
+        </p>
+        <p className="product-card-category">Category: {product.category}</p>
+        <p className="product-card-brand">Brand: {product.brand}</p>
+        <p className="product-card-discount">
+          Discount: {product.discountPercentage}%
+        </p>
+        <p className="product-card-stock">Stock: {product.stock}</p>
       </Link>
       <button className="product-card-btn" onClick={() => addToCart(product)}>
         Add to cart
