@@ -1,4 +1,5 @@
 import "../styles/ProductCard.css";
+import '@fortawesome/fontawesome-free/css/all.css';
 
 import { useContext, useEffect, useState } from "react";
 
@@ -33,32 +34,46 @@ export function ProductCard({ product }: ProductCardProps) {
     );
   }
 
+  function StarRating({ rating }: { rating: number }) {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      if (i < rating) {
+        stars.push(<i key={i} className="fas fa-star star-full"></i>);
+      } else if (i - rating < 0.5 && i - rating >= 0) {
+        stars.push(<i key={i} className="fas fa-star-half-alt star-half"></i>);
+      } else {
+        stars.push(<i key={i} className="far fa-star star-empty"></i>);
+      }
+    }
+    return <div className="star-container">{stars}</div>;
+  }
+
   return (
     <div key={product.id} className="product-card">
       <Link to={`/shop/product/${product.id}`}>
-        <h2 className="product-card-h2">{product.title}</h2>
         <img
           className={`product-card-img ${imageLoaded ? "loaded" : ""}`}
           src={product.thumbnail}
           alt={product.title}
           onLoad={() => setImageLoaded(true)}
         />
-        <p className="product-rating">rating: {product.rating}</p>
+        <h2 className="product-card-h2">{product.title}</h2>
+        {/* <p className="product-rating">rating: {product.rating}</p> */}
+        <StarRating rating={product.rating} />
+        {/* <StarRating rating={Math.floor(product.rating)} /> */}
         <p className="product-card-para">Price {product.price.toFixed(2)} $</p>
-        <p className="product-card-quantity">Quantity: {product.quantity}</p>
-        <p className="product-card-description">
-          Description: {product.description}
-        </p>
-        <p className="product-card-category">Category: {product.category}</p>
-        <p className="product-card-brand">Brand: {product.brand}</p>
-        <p className="product-card-discount">
-          Discount: {product.discountPercentage}%
-        </p>
+        {/* <p className="product-card-quantity">Quantity: {product.quantity}</p> */}
+        {/* <p className="product-card-description"> Description: {product.description} </p> */}
+        {/* <p className="product-card-category">Category: {product.category}</p> */}
+        {/* <p className="product-card-brand">Brand: {product.brand}</p> */}
+        <p className="product-card-discount"> Discount: {product.discountPercentage}% </p>
         <p className="product-card-stock">Stock: {product.stock}</p>
       </Link>
-      <button className="product-card-btn" onClick={() => addToCart(product)}>
-        Add to cart
-      </button>
+      <div className="button-container">
+        <button className="product-card-btn" onClick={() => addToCart(product)}>
+          <i className="fas fa-shopping-cart"></i>
+        </button>
+      </div>
     </div>
   );
 }
