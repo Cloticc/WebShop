@@ -1,3 +1,5 @@
+import 'react-toastify/dist/ReactToastify.css';
+
 import { Route, Routes } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
@@ -12,6 +14,7 @@ import { ProductProvider } from "./context/ProductContext";
 import { Shop } from "./components/Shop";
 import { ShoppingCart } from "./components/ShoppingCart";
 import { SignUp } from "./components/SignUp";
+import { ToastContainer } from 'react-toastify';
 
 export function App() {
   return (
@@ -19,6 +22,7 @@ export function App() {
       <FilterProvider>
         <ProductProvider>
           <CartProvider>
+            <ToastContainer />
             <Navbar />
             <Routes>
               <Route path="/signup" element={<SignUp />} />
