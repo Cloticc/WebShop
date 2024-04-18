@@ -61,13 +61,15 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* <p className="product-rating">rating: {product.rating}</p> */}
         <StarRating rating={product.rating} />
         {/* <StarRating rating={Math.floor(product.rating)} /> */}
-        <p className="product-card-para">Price {product.price.toFixed(2)} $</p>
         {/* <p className="product-card-quantity">Quantity: {product.quantity}</p> */}
         {/* <p className="product-card-description"> Description: {product.description} </p> */}
         {/* <p className="product-card-category">Category: {product.category}</p> */}
         {/* <p className="product-card-brand">Brand: {product.brand}</p> */}
         <p className="product-card-discount"> Discount: {product.discountPercentage}% </p>
         <p className="product-card-stock">Stock: {product.stock}</p>
+        <div className="price-container">
+          <p className="product-card-price">{product.price.toFixed(0)}$</p>
+        </div>
       </Link>
       <div className="button-container">
         <button className="product-card-btn" onClick={() => addToCart(product)}>

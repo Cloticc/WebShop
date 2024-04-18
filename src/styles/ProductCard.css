@@ -26,17 +26,24 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.price-container {
+  position: relative;
+}
 
-.product-card-para {
+.product-card-price {
+  position: absolute;
+  top: 120px;
+  right: 220px;
   margin-bottom: 10px;
   color: #777;
 }
-
 .product-card-img {
   max-width: 100%;
+  width: -webkit-fill-available;
   height: 200px;
   margin-bottom: 10px;
-  object-fit: cover;
+  /* object-fit: cover; */
+  object-fit: contain;
   border-radius: 10px;
 }
 
@@ -82,7 +89,7 @@
 .product-card-btn {
   position: absolute;
   right: -5px;
-  top: 80px;
+  top: 100px;
   background-color: #007bff;
   color: #fff;
   border: none;
