@@ -34,27 +34,43 @@ export const Navbar = () => {
 
       <div className="navbar-container">
         <Link className="navbar-item" to="/">
+          <i
+            className="fas fa-home"
+          >
+          </i>
           Home
         </Link>
         <Link className="navbar-item" to="/shop">
+          <i
+            className="fas fa-store"
+          ></i>
           Shop
         </Link>
         {isAuthenticated ? (
           <>
             <Link className="navbar-item" to="/dashboard">
+              <i
+                className="fas fa-tachometer-alt"
+              ></i>
               Dashboard
             </Link>
             <button className="navbar-button" onClick={logout}>
+              <i
+                className="fas fa-sign-out-alt"
+              ></i>
               Logout
             </button>
           </>
         ) : (
           <Link className="navbar-item" to="/login">
+            <i
+              className="fas fa-user"
+            ></i>
             Login
           </Link>
         )}
         <button className="navbar-button" onClick={toggleCart}>
-          Cart ({totalQuantity})
+          <i className="fas fa-shopping-cart"></i>({totalQuantity})
         </button>
         {cartVisible && <ShoppingCart toggleCart={toggleCart} />}
       </div>
