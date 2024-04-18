@@ -22,7 +22,7 @@ export function App() {
       <FilterProvider>
         <ProductProvider>
           <CartProvider>
-            <ToastContainer />
+            <ToastContainer position="bottom-right" />
             <Navbar />
             <Routes>
               <Route path="/signup" element={<SignUp />} />
