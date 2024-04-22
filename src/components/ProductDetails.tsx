@@ -23,13 +23,12 @@ export const ProductDetails = () => {
 
   return (
     <div className="details-container">
-      <img className="details-img" src={product.image} alt={product.title} />
+      <img className="details-img" src={product.images[0]} alt={product.title} />
       <div className="details-content">
         <h1 className="details-title">{product.title} </h1>
         <p className="details-description">{product.description}</p>
         <p className="details-category">category: {product.category}</p>
-        <p className="details-rating">rating: {product.rating.rate}</p>
-        <p className="details-count">count: {product.rating.count}</p>
+        <p className="details-rating">rating: {product.rating}</p>
         {/* <p className="details-quantity">quantity: {product.quantity}</p> */}
         <p className="details-price">price {product.price.toFixed(2)} $</p>
         <button className="details-card-btn" onClick={() => addToCart(product)}>

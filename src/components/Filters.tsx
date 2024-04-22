@@ -5,7 +5,7 @@ import { FilterContext } from "../context/FilterContext";
 export const Filters = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const { setFilters } = useContext(FilterContext);
-
+  // const [price, setPrice] = useState<number>(0);
   useEffect(() => {
     fetch("https://dummyjson.com/products/categories")
       .then((res) => res.json())
@@ -23,7 +23,7 @@ export const Filters = () => {
     <div>
       <h1>Filters</h1>
       <select onChange={handleFilterChange}>
-        <option value="">All</option>
+        <option value="">All</option>6
         {categories.map((category) => (
           <option key={category} value={category}>
             {category}
