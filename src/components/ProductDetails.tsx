@@ -12,7 +12,7 @@ export const ProductDetails = () => {
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/${id}`)
+    fetch(`https://dummyjson.com/products/${id}`)
       .then((response) => response.json())
       .then((data) => setProduct({ ...data, quantity: 1 }));
   }, [id]);
